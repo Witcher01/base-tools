@@ -1,6 +1,10 @@
 #include <errno.h>
+#include <stdarg.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
+
+#include "util.h"
 
 void *
 emalloc(size_t size)
@@ -39,7 +43,7 @@ fail(const char *fmt, ...)
 	va_end(ap);
 
 	/* if given string ends with a ':' print more info using perror */
-	if (fmt[0] && fmt[strlen(fmt) - 1)] == ':') {
+	if (fmt[0] && fmt[strlen(fmt) - 1] == ':') {
 		fputc(' ', stderr);
 		perror(NULL);
 	} else {
