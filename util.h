@@ -8,5 +8,6 @@
 void *emalloc(size_t);
 void *ecalloc(size_t, size_t);
 void fail(const char *, ...);
+void efail(const char *, ...);
 
 #endif /* UTIL_H */
