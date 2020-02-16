@@ -1,0 +1,12 @@
+CC = gcc
+CFLAGS = -Wall -std=c99 -pedantic
+DEPS = util.h args.h file_util.h
+
+cat: cat.o util.o file_util.o $(DEPS)
+	$(CC) $(CFLAGS) -o $@ cat.o util.o file_util.o
+
+%.o: %.c $(DEPS)
+	$(CC) $(CFLAGS) -c -o $@ $<
+
+clean:
+	rm cat *.o
