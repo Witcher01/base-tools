@@ -8,6 +8,8 @@
 
 void usage();
 
+char *argv0;
+
 void
 usage()
 {
