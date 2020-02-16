@@ -6,8 +6,6 @@
 #include "file_util.h"
 #include "util.h"
 
-void usage();
-
 char *argv0;
 
 void

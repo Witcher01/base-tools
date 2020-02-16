@@ -17,6 +17,8 @@
 
 #define ARGSEND		}
 
+void usage(void);
+
 /* name of the executed program */
 extern char *argv0;
 
