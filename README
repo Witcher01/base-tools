@@ -1,0 +1,8 @@
+base-tools
+==========
+base-tools is a collection of basic commandline tools written by me.
+This is still a WIP project and I work on it rarely when I have the time.
+
+Requirements
+------------
+No requirements thus far, other than a C compiler to build the binaries.
