@@ -1,4 +1,7 @@
+#define _POSIX_C_SOURCE 2
+
 #include <fcntl.h>
+#include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
 
@@ -17,25 +20,34 @@ usage()
 int
 main(int argc, char *argv[])
 {
-	int fd, ret = 0;
+	int fd, ret = EXIT_SUCCESS;
+	int c;
+	int index;
 
-	ARGSBEGIN {
-	default:
-		usage();
-	} ARGSEND
+	argv0 = *argv;
+
+	while ((c = getopt(argc, argv, "+v")) != -1) {
+		switch (c) {
+		case 'v':
+			fail("%s: version 0.1", argv[0]);
+			break;
+		default:
+			usage();
+		}
+	}
 
 	/* no arguments are given */
-	if (argc < 1) {
+	if (argc == optind) {
 		/* pass STDIN to STDOUT */
 		concatenate(STDIN_FILENO, STDOUT_FILENO);
 	}
 
 	/* argv points after flags */
-	for (; argv[0] && argc > 0; argv++, argc--) {
+	for (index = optind; index < argc; ++index) {
 		/* "-" means stdin */
-		if (!(strcmp(argv[0], "-"))) {
+		if (!(strcmp(argv[index], "-"))) {
 			fd = STDIN_FILENO;
-		} else if (!(fd = open(argv[0], O_RDONLY))) {
+		} else if (!(fd = open(argv[index], O_RDONLY))) {
 			fail("open:");
 		}
 
@@ -50,7 +62,7 @@ main(int argc, char *argv[])
 		}
 
 		/* fd is not stdin */
-		if (strcmp(argv[0], "-") != 0) {
+		if (strcmp(argv[index], "-") != 0) {
 			close(fd);
 		}
 	}
