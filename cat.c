@@ -42,7 +42,7 @@ main(int argc, char *argv[])
 		concatenate(STDIN_FILENO, STDOUT_FILENO);
 	}
 
-	/* argv points after flags */
+	/* optind contains index after all flags */
 	for (index = optind; index < argc; ++index) {
 		/* "-" means stdin */
 		if (!(strcmp(argv[index], "-"))) {
